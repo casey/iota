@@ -111,7 +111,7 @@ Also, the use of such cryptography, specifically Winternitz signatures, leaves I
 
 === Poor Wallet Security
 
-The IOTA wallet requires users to manually enter an 81 character seed, instead of securely generating one. This led users to use malicious online seed generators, leading to the theft of almost $4 million in funds. ^<<seed-generators>>^
+The IOTA wallet requires users to manually enter an 81 character seed, instead of securely generating one. This led users to use malicious online seed generators, leading to the theft of almost $4 million of user funds. ^<<seed-generators>>^
 
 
 == Additional Links
