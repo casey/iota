@@ -1,5 +1,6 @@
 = IOTA is Broken
 Casey Rodarmor
+:docinfo: shared
 :toc: macro
 :toc-title:
 :sectnums:
