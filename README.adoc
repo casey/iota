@@ -5,11 +5,12 @@ Casey Rodarmor <casey@rodarmor.com>
 :toc: macro
 :toc-title:
 :sectnums:
+:sectanchors:
 
 [discrete]
 == Introduction
 
-In this article I attempt to summarize the numerous technical, social, and ethical issues with the IOTA project, The IOTA Foundation, and the IOTA developers.
+In this article I attempt to summarize the numerous technical, social, and ethical problems surrounding the IOTA project, The IOTA Foundation, and the IOTA developers.
 
 If you have suggestions for improvement or additional references, please open a pull-request or issue https://github.com/casey/iota[here].
 
@@ -23,22 +24,32 @@ toc::[]
 
 === Centralization
 
-All IOTA transactions must be approved by a server run by The IOTA Foundation called "The Coordinator". ^<<iota-is-centralized>>^
+IOTA is fully centralized. All IOTA transactions must be approved by a server run by The IOTA Foundation called "The Coordinator". footnoteref:[iota-is-centralized,
+  https://medium.com/@ercwl/iota-is-centralized-6289246e7b4d[IOTA is centralized], https://twitter.com/ercwl[Eric Wall]
+]
 
-The Coordinator exists to prevent DoS attacks and double spends. The IOTA Foundation claims that at some point the coordinator can be phased out, but these claims are not credible due to the intractable nature of these issues. ^<<iota-doesnt-scale>>^
+The Coordinator exists to prevent DoS attacks and double spends. The IOTA Foundation claims that at some point the coordinator can be phased out, but these claims are not credible due to the intractable nature of these issues. footnoteref:[iota-doesnt-scale,
+  https://medium.com/@kaykurokawa/iota-doesnt-scale-fff54f56e975[IOTA Doesn't Scale], https://twitter.com/kaykurokawa[Kay Kurokawa]
+]
 
-Since all transactions must be approved by a single server, run by a single entity, IOTA is not decentralized. Additionally, The Coordinator is a single point of failure, and has been shut down intentionally by The IOTA Foundation to halt activity on the network. ^<<iota-shutdown>>^
+Since all transactions must be approved by a single server, run by a single entity, IOTA is not decentralized. Additionally, The Coordinator is a single point of failure, and has been shut down intentionally by The IOTA Foundation to halt activity on the network. footnoteref:[iota-shutdown,
+  https://blog.iota.org/gui-v2-5-2-latest-release-with-iota-reclaim-tool-32d364d6241a[GUI v2.5.2: Latest Release with IOTA Reclaim Tool], https://twitter.com/DomSchiener[Dominik Schiener]
+]
 
 
 === Tip Selection Attack Vectors
 
-IOTA transactions are arranged in a directed acyclic graph, with each transaction referencing two previous transactions by hash.^<<iota-whitepaper>>^
+IOTA transactions are arranged in a directed acyclic graph, with each transaction referencing two previous transactions by hash. footnoteref:[iota-whitepaper,
+  https://iota.org/IOTA_Whitepaper.pdf[IOTA Whitepaper], https://blog.iota.org/@serguei.popov[Serguei Papov]
+]
 
 The choice of which transactions to reference is a matter of local policy, and thus nodes have enormous leeway in the shape of the graph that they construct, and which tips they select.
 
 If a selfish node wants their transaction to be accepted, they will select tips which they know that other nodes have already verified. This may lead to new transactions which are not known to many nodes to be confirmed slowly, or not at all.
 
-The functionality of the network depends on transactions getting confirmed in a timely fashion, even in the presence of malicious or selfish nodes. The IOTA developers claim that nodes will employ a tip-selection strategy which confirms new trasnactions quickly, however this has not been proven to be the case. ^<<iota-alarming>>^
+The functionality of the network depends on transactions getting confirmed in a timely fashion, even in the presence of malicious or selfish nodes. The IOTA developers claim that nodes will employ a tip-selection strategy which confirms new trasnactions quickly, however this has not been proven to be the case. footnoteref:[iota-alarming,
+  https://medium.com/@weka/why-i-find-iota-deeply-alarming-934f1908194b[Why I find Iota deeply alarming], https://www.linkedin.com/in/nicksdjohnson/[Nick Johnson]
+]
 
 
 === Ternary Overhead
@@ -58,45 +69,63 @@ Because of this, nodes will likely have to enforce additional local policies on 
 
 Outputs that have been included in a Coordinator milestone are more valuable than those that haven't, since The Coordinator is the current the arbiter of truth in the IOTA system. Thus, if The Coordinator refuses to approve a transaction, its outputs are effectively worthless.
 
-Similarly, transaction outputs that appear in a snapshot^<<iota-snapshot>>^ are more valuable than those that have. Additionally, whatever entities control what transactions are included in a snapshot have enormous power are an additional centralization factor. For an example, if transactions are deemed to be "spam" and are not included in an snapshot, their outputs will be worthless.
+Similarly, transaction outputs that appear in a snapshot footnoteref:[iota-snapshot,
+  https://medium.com/@ralf/prepare-for-the-january-28-2018-iota-snapshot-10f565b371ab[Prepare for the January 28, 2018 IOTA Snapshot (updated)], https://twitter.com/ralf[Ralf Rottmann]
+] are more valuable than those that have. Additionally, whatever entities control what transactions are included in a snapshot have enormous power are an additional centralization factor. For an example, if transactions are deemed to be "spam" and are not included in an snapshot, their outputs will be worthless.
 
 If IOTA adopts some kind of sharding mechanism, outputs will be more or less valuable on the basis of whether or not they are known to a particular shard. Outputs may have value within a shard, but be worthless outside of that shard.
 
 
 === Broken Custom Hash Function
 
-IOTA used a custom hash function called Curl, which was later found to be insecure. ^<<curl-vulnerability-report>>^ ^<<breaking-curl>>^
+IOTA used a custom hash function called Curl, which was later found to be insecure. footnoteref:[curl-vulnerability-report,
+  https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md[IOTA Vulnerability Report: Cryptanalysis of the Curl Hash Function Enabling Practical Signature Forgery Attacks on the IOTA Cryptocurrency], https://www.linkedin.com/in/ethan-heilman-39896934/[Ethan Heilman], http://nehanarula.org/[Neha Narula], https://twitter.com/tdryja[Thaddeus Dryja], and https://madars.org/[Madars Virza]
+] footnoteref:[breaking-curl,
+  https://www.youtube.com/watch?v=7a96MHqND0g[Breaking IOTA's Curl Hash Function], http://cs-people.bu.edu/heilman/[Ethan Heilman]
+]
 
 Although this vulnerability was patched, the choice to use a custom hash function was an extremely bad one, and reflects poorly on the judgment of the IOTA developers.
 
 Creating a cryptographically secure hash function is extremely difficult and furthermore unnecessary, as good hash functions are freely available. That Curl was eventually found to be vulnerable was an entirely predictable and avoidable outcome.
 
-The vulnerability in Curl required The IOTA Foundation to take custody of user funds, requiring users to to follow a byzantine reclamation process to get them back, with many users still unable to access their funds. ^<<reclaim-process>>^
+The vulnerability in Curl required The IOTA Foundation to take custody of user funds, requiring users to to follow a byzantine reclamation process to get them back, with many users still unable to access their funds. footnoteref:[reclaim-process,
+  https://blog.iota.org/gui-wallet-phase-two-of-the-reclaim-process-f5913109cf46[GUI Wallet: Phase Two of the Reclaim process], https://twitter.com/DomSchiener[Dominik Schiener]
+]
 
 
 === Intentional Vulnerabilities
 
-The IOTA developers have intentionally injected vulnerabilities into their open source code in an attempt to discourage copying. ^<<intentional-vulnerability>>^
+The IOTA developers have intentionally injected vulnerabilities into their open source code in an attempt to discourage copying. footnoteref:[intentional-vulnerability,
+  https://gist.github.com/Come-from-Beyond/a84ab8615aac13a4543c786f9e35b84a[CFB's letters to Neha Narula's team during their analysis of Curl-P hash function], link:++https://twitter.com/c___f___b++[Sergey Ivancheglo]
+]
 
-The code that they released was represented to be complete and free of known issues. The intentional inclusion of severe vulnerabilities in such code is plainly fraud. ^<<open-source-fraud>>^ ^<<iota-issues>>^
+The code that they released was represented to be complete and free of known issues. The intentional inclusion of severe vulnerabilities in such code is plainly fraud. footnoteref:[open-source-fraud,
+  https://twitter.com/peterktodd/status/907837055715172352[Tweet], https://petertodd.org/[Peter Todd]
+] footnoteref:[iota-issues,
+  https://www.reddit.com/r/CryptoCurrency/comments/72l7kp/why_i_find_iota_deeply_alarming_eth_core_dev/[Issue with IOTA, Reddit Comment], https://twitter.com/VitalikButerin[Vitalik Buterin]
+]
 
 
 === No Recourse Against Spam
 
-No global transaction limit is enforced in IOTA, making it vulnerable to malicious participants generating a high enough volume of transactions to overwhelm the network. If the network becomes popular, nodes will likely be overwhelmed by non-malicious participents that simply generate a high volume of transactions. ^<<iota-doesnt-scale>>^
+No global transaction limit is enforced in IOTA, making it vulnerable to malicious participants generating a high enough volume of transactions to overwhelm the network. If the network becomes popular, nodes will likely be overwhelmed by non-malicious participents that simply generate a high volume of transactions. footnoteref:[iota-doesnt-scale]
 
-IOTA is intended to be run on nodes with low power, compute, memory, disk, and network bandwidth, and such nodes will be easily overwhelmed by even a modest number of transactions.
+IOTA is intended to be run on nodes with low power, compute, memory, disk, and network bandwidth, and such nodes will be easily overwhelmed by even a modest number of transactions. footnoteref:[infinite-scalability,
+  https://twitter.com/nicksdjohnson/status/964036549162790912[Tweet], https://www.linkedin.com/in/nicksdjohnson/[Nick Johnson]
+]
 
 
 === Non-zero Transaction Fees
 
-IOTA transactions do not pay an explicit fee. ^<<iota-whitepaper>>^ However, this does not mean that IOTA transactions are free.
+IOTA transactions do not pay an explicit fee. footnoteref:[iota-whitepaper] However, this does not mean that IOTA transactions are free.
 
 IOTA nodes must dedicate significant power, compute resources, and die space to perform the proof-of-work needed to generate transactions and process incoming transactions.
 
 Also, since the incentive for a transaction to be confirmed is unclear, a node may be required to pay a permanode, a node in another shard, or a central issuer of snapshots to confirm a transaction.
 
-Thus, even if a node pays no explicit fee for its transactions, it may pay significant implicit fees, and thus the claim that IOTA transactions are free of fees is only superficial true, and false in every sense that matters. ^<<iota-response>>^
+Thus, even if a node pays no explicit fee for its transactions, it may pay significant implicit fees, and thus the claim that IOTA transactions are free of fees is only superficial true, and false in every sense that matters. footnoteref:[iota-response,
+  https://www.media.mit.edu/posts/iota-response/[Our response to "A Cryptocurrency Without a Blockchain Has Been Built to Outperform Bitcoin"], https://joi.ito.com/[Joi Ito]
+]
 
 
 === Double Spend Vulnerability
@@ -113,69 +142,37 @@ IOTA is built for a global network of embedded devices communicating over mesh n
 
 === Premature Use of Post-Quantum Cryptography
 
-IOTA uses cryptography that cannot be broken by quantum computers. This provides no benefit, as quantum computers large enough to threaten existing cryptosystems do not exist, and may not exist for many decades.
+IOTA uses cryptography that cannot be broken by quantum computers. footnoteref:[iota-whitepaper] The use of such cryptography, specifically Winternitz signatures, leaves IOTA users vulnerable to loss of funds if they ever reuse an address. This attack that has already been seen in practice, with one user reportedly losing $30,000 USD worth of IOTA. footnoteref:[iota-stolen,
+  https://www.reddit.com/r/CryptoCurrency/comments/7gwl38/hello_guys_i_have_lost_30k_in_iota_and_i_would/[User reports $30,000 worth of IOTA stolen due weakness of IOTA's post-quantum signature scheme to address reuse]
+]
 
-Also, the use of such cryptography, specifically Winternitz signatures, leaves IOTA users vulnerable to loss of funds if they ever reuse an address, an attack that has already been seen in practice. ^<<iota-stolen>>^
+As quantum computers large enough to threaten existing cryptosystems do not exist and may not exist for many decades, this use of post quantum cryptography comes with no tangible benefit.
 
 
 === Poor Wallet Security
 
-The IOTA wallet requires users to manually enter an 81 character seed, instead of securely generating one. This led users to use malicious online seed generators, leading to the theft of almost $4 million of user funds. ^<<seed-generators>>^
-
+The IOTA wallet requires users to manually enter an 81 character seed, instead of securely generating one. This led users to use malicious online seed generators, leading to the theft of almost $4 million of user funds. footnoteref:[seed-generators,
+  https://twitter.com/nic__carter/status/954950774534090752[Tweet], link:++https://cryptofundamental.com/@nic__carter++[Nic Carter]
+]
 
 === Unusable Network and Wallet
 
-Users have reported numerous issues with the IOTA network and wallet software. These include unusable software, a slow and unusable network, loss of funds, and an inability to move funds. ^<<iota-cannot-be-used-for-iot>>^ ^<<iota-disappointment>>^ ^<<iota-wallet-is-terrible>>^ ^<<iota-scam>>^ ^<<money-trapped>>^ ^<<network-dead>>^ ^<<network-unusable>>^ ^<<a-tangled-mess>>^
-
-
-== References
-
-- [[iota-is-centralized]] https://medium.com/@ercwl/iota-is-centralized-6289246e7b4d[IOTA is centralized], https://twitter.com/ercwl[Eric Wall]
-
-- [[iota-stolen]]User reports $30,000 worth of IOTA stolen due weakness of IOTA's post-quantum signature scheme to address reuse: +
-  https://www.reddit.com/r/CryptoCurrency/comments/7gwl38/hello_guys_i_have_lost_30k_in_iota_and_i_would/[link],
-  https://archive.is/EAZ2n[archive]
-
-- [[iota-shutdown]] https://blog.iota.org/gui-v2-5-2-latest-release-with-iota-reclaim-tool-32d364d6241a[GUI v2.5.2: Latest Release with IOTA Reclaim Tool], https://twitter.com/DomSchiener[Dominik Schiener]
-
-- [[iota-doesnt-scale]] https://medium.com/@kaykurokawa/iota-doesnt-scale-fff54f56e975[IOTA Doesn't Scale], https://twitter.com/kaykurokawa[Kay Kurokawa]
-
-- [[iota-whitepaper]] https://iota.org/IOTA_Whitepaper.pdf[IOTA Whitepaper], https://blog.iota.org/@serguei.popov[Serguei Papov]
-
-- [[iota-snapshot]] https://medium.com/@ralf/prepare-for-the-january-28-2018-iota-snapshot-10f565b371ab[Prepare for the January 28, 2018 IOTA Snapshot (updated)], https://twitter.com/ralf[Ralf Rottmann]
-
-- [[iota-response]] https://www.media.mit.edu/posts/iota-response/[Our response to "A Cryptocurrency Without a Blockchain Has Been Built to Outperform Bitcoin"], https://joi.ito.com/[Joi Ito]
-
-- [[curl-vulnerability-report]] https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md[IOTA Vulnerability Report: Cryptanalysis of the Curl Hash Function Enabling Practical Signature Forgery Attacks on the IOTA Cryptocurrency], https://www.linkedin.com/in/ethan-heilman-39896934/[Ethan Heilman], http://nehanarula.org/[Neha Narula], https://twitter.com/tdryja[Thaddeus Dryja], and https://madars.org/[Madars Virza]
-
-- [[breaking-curl]] https://www.youtube.com/watch?v=7a96MHqND0g[Breaking IOTA's Curl Hash Function], http://cs-people.bu.edu/heilman/[Ethan Heilman]
-
-- [[intentional-vulnerability]] https://gist.github.com/Come-from-Beyond/a84ab8615aac13a4543c786f9e35b84a[CFB's letters to Neha Narula's team during their analysis of Curl-P hash function], link:++https://twitter.com/c___f___b++[Sergey Ivancheglo]
-
-- [[open-source-fraud]] https://twitter.com/peterktodd/status/907837055715172352[Tweet], https://petertodd.org/[Peter Todd]
-
-- [[seed-generators]] https://twitter.com/nic__carter/status/954950774534090752[Tweet], link:++https://cryptofundamental.com/@nic__carter++[Nic Carter]
-
-- [[reclaim-process]] https://blog.iota.org/gui-wallet-phase-two-of-the-reclaim-process-f5913109cf46[GUI Wallet: Phase Two of the Reclaim process], https://twitter.com/DomSchiener[Dominik Schiener]
-
-- [[iota-cannot-be-used-for-iot]] https://shitcoin.com/iota-cannot-be-used-for-iot-loss-of-funds-may-occur-e45b1ed9dd6b[IOTA: Cannot be used for IoT. Loss of funds may occur], https://twitter.com/abrkn[Andreas Brekken]
-
-- [[iota-disappointment]] https://github.com/iotaledger/wallet/issues/734[My IOTA disappointment and a warning to others], https://github.com/UnitTwopointZero[UnitTwopointZero]
-
-- [[iota-wallet-is-terrible]] https://www.reddit.com/r/Iota/comments/6y19n2/iota_wallet_is_terribleunusable/[IOTA Wallet is terrible/unusable], https://www.reddit.com/user/winghaven[winghaven]
-
-- [[iota-scam]] https://medium.com/supercryptocurrency/iota-cryptocurrency-is-a-scam-heres-10-reasons-why-ca111de0f19a[IOTA cryptocurrency is a scam, here’s 10 good reasons why], https://medium.com/@AndroidAdvance[Android Advance]
-
-- [[light-wallet-unusable]] https://forum.iota.org/t/light-wallet-2-3-1-unusable-invalid-transaction-hash-after-every-transfer-attempt/2689[Light Wallet 2.3.1 unusable], https://forum.iota.org/u/portman/[Fabrizio Ranieri]
-
-- [[money-trapped]] https://www.cryptocompare.com/coins/iot/post/p_554737[Iota light wallet is completely unusable], https://www.cryptocompare.com/profile/mindblown/[mindblown]
-
-- [[network-dead]] https://twitter.com/jratcliff/status/939578638432985088[Tweet], https://github.com/jratcliff63367[John Ratcliff]
-
-- [[network-unusable]] https://twitter.com/maxekaplan/status/939916284967444480[Tweet], https://twitter.com/maxekaplan[Max Kaplan]
-
-- [[a-tangled-mess]] http://codesuppository.blogspot.com/2017/12/iota-tangled-mess.html?m=1[IOTA: A Tangled Mess], https://github.com/jratcliff63367[John Ratcliff] 
-
-- [[iota-alarming]] https://medium.com/@weka/why-i-find-iota-deeply-alarming-934f1908194b[Why I find Iota deeply alarming], https://www.linkedin.com/in/nicksdjohnson/[Nick Johnson]
-
-- [[iota-issues]] https://www.reddit.com/r/CryptoCurrency/comments/72l7kp/why_i_find_iota_deeply_alarming_eth_core_dev/[Issue with IOTA, Reddit Comment], https://twitter.com/VitalikButerin[Vitalik Buterin]
+Users have reported numerous issues with the IOTA network and wallet software. These include unusable software, a slow and unusable network, loss of funds, and an inability to move funds. footnoteref:[a-tangled-mess,
+  http://codesuppository.blogspot.com/2017/12/iota-tangled-mess.html?m=1[IOTA: A Tangled Mess], https://github.com/jratcliff63367[John Ratcliff] 
+] footnoteref:[iota-cannot-be-used-for-iot,
+  https://shitcoin.com/iota-cannot-be-used-for-iot-loss-of-funds-may-occur-e45b1ed9dd6b[IOTA: Cannot be used for IoT. Loss of funds may occur], https://twitter.com/abrkn[Andreas Brekken]
+] footnoteref:[iota-disappointment,
+  https://github.com/iotaledger/wallet/issues/734[My IOTA disappointment and a warning to others], https://github.com/UnitTwopointZero[UnitTwopointZero]
+] footnoteref:[iota-wallet-is-terrible,
+  https://www.reddit.com/r/Iota/comments/6y19n2/iota_wallet_is_terribleunusable/[IOTA Wallet is terrible/unusable], https://www.reddit.com/user/winghaven[winghaven]
+] footnoteref:[iota-scam,
+  https://medium.com/supercryptocurrency/iota-cryptocurrency-is-a-scam-heres-10-reasons-why-ca111de0f19a[IOTA cryptocurrency is a scam, here’s 10 good reasons why], https://medium.com/@AndroidAdvance[Android Advance]
+] footnoteref:[light-wallet-unusable,
+  https://forum.iota.org/t/light-wallet-2-3-1-unusable-invalid-transaction-hash-after-every-transfer-attempt/2689[Light Wallet 2.3.1 unusable], https://forum.iota.org/u/portman/[Fabrizio Ranieri]
+] footnoteref:[money-trapped,
+  https://www.cryptocompare.com/coins/iot/post/p_554737[Iota light wallet is completely unusable], https://www.cryptocompare.com/profile/mindblown/[mindblown]
+] footnoteref:[network-dead,
+  https://twitter.com/jratcliff/status/939578638432985088[Tweet], https://github.com/jratcliff63367[John Ratcliff]
+] footnoteref:[network-unusable,
+  https://twitter.com/maxekaplan/status/939916284967444480[Tweet], https://twitter.com/maxekaplan[Max Kaplan]
+]
