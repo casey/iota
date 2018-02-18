@@ -1,8 +1,8 @@
-build:
-	asciidoctor index.adoc
-
+render:
+	asciidoctor README.adoc -o docs/index.html
+	
 watch:
-	@watchexec -i index.html -i docinfo 'date "+%+: build" && just --quiet build'
+	@watchexec -i 'docs/*' 'date "+%+: rendering..." && just --quiet render'
 
 open:
-	open index.html
+	open docs/index.html

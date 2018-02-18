@@ -1,6 +1,7 @@
 = IOTA is Broken
 Casey Rodarmor
 :docinfo: shared
+:nofooter:
 :toc: macro
 :toc-title:
 :sectnums:
@@ -150,6 +151,6 @@ The IOTA wallet requires users to manually enter an 81 character seed, instead o
 
 - [[open-source-fraud]] https://twitter.com/peterktodd/status/907837055715172352[Tweet], https://petertodd.org/[Peter Todd]
 
-- [[seed-generators]] https://twitter.com/nic__carter/status/954950774534090752[Tweet], https://cryptofundamental.com/@nic__carter[Nic Carter]
+- [[seed-generators]] https://twitter.com/nic__carter/status/954950774534090752[Tweet], link:++https://cryptofundamental.com/@nic__carter++[Nic Carter]
 
 - [[reclaim-process]] https://blog.iota.org/gui-wallet-phase-two-of-the-reclaim-process-f5913109cf46[GUI Wallet: Phase Two of the Reclaim process], https://twitter.com/DomSchiener[Dominik Schiener]
