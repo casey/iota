@@ -47,7 +47,7 @@ The choice of which transactions to reference is a matter of local policy, and t
 
 If a selfish node wants their transaction to be accepted, they will select tips which they know that other nodes have already verified. This may lead to new transactions which are not known to many nodes to be confirmed slowly, or not at all.
 
-The functionality of the network depends on transactions getting confirmed in a timely fashion, even in the presence of malicious or selfish nodes. The IOTA developers claim that nodes will employ a tip-selection strategy which confirms new trasnactions quickly, however this has not been proven to be the case. footnoteref:[iota-alarming,
+The functionality of the network depends on transactions getting confirmed in a timely fashion, even in the presence of malicious or selfish nodes. The IOTA developers claim that nodes will employ a tip-selection strategy which confirms new transactions quickly, however this has not been proven to be the case. footnoteref:[iota-alarming,
   https://medium.com/@weka/why-i-find-iota-deeply-alarming-934f1908194b[Why I find Iota deeply alarming], https://www.linkedin.com/in/nicksdjohnson/[Nick Johnson]
 ]
 
@@ -63,7 +63,7 @@ And, since vast majority of hardware fabrication facilities and technology are b
 
 === Non-fungible Tokens
 
-IOTA transactions form a directed acyclic graph. However, a transaction's position within that graph, and other factors, may make that transaction's outputs more or less valuable than other transactions.
+A transaction's position within the DAG, and other factors, may make that transaction's outputs more or less valuable than other transactions.
 
 Because of this, nodes will likely have to enforce additional local policies on which transactions to accept, which negatively impacts the fungibility of IOTA transaction outputs.
 
