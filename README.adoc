@@ -67,11 +67,11 @@ A transaction's position within the DAG, and other factors, may make that transa
 
 Because of this, nodes will likely have to enforce additional local policies on which transactions to accept, which negatively impacts the fungibility of IOTA transaction outputs.
 
-Outputs that have been included in a Coordinator milestone are more valuable than those that haven't, since The Coordinator is the current the arbiter of truth in the IOTA system. Thus, if The Coordinator refuses to approve a transaction, its outputs are effectively worthless.
+Outputs that have been included in a Coordinator milestone are more valuable than those that haven't, since The Coordinator is the current arbiter of truth in the IOTA system. Thus, if The Coordinator refuses to approve a transaction, its outputs are effectively worthless.
 
 Similarly, transaction outputs that appear in a snapshot footnoteref:[iota-snapshot,
   https://medium.com/@ralf/prepare-for-the-january-28-2018-iota-snapshot-10f565b371ab[Prepare for the January 28, 2018 IOTA Snapshot (updated)], https://twitter.com/ralf[Ralf Rottmann]
-] are more valuable than those that have. Additionally, whatever entities control what transactions are included in a snapshot have enormous power are an additional centralization factor. For an example, if transactions are deemed to be "spam" and are not included in an snapshot, their outputs will be worthless.
+] are more valuable than those that do not. Additionally, whatever entities control what transactions are included in a snapshot have enormous power are an additional centralization factor. For an example, if transactions are deemed to be "spam" and are not included in an snapshot, their outputs will be worthless.
 
 If IOTA adopts some kind of sharding mechanism, outputs will be more or less valuable on the basis of whether or not they are known to a particular shard. Outputs may have value within a shard, but be worthless outside of that shard.
 
