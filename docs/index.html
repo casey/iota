@@ -471,11 +471,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_intentional_vulnerabilities">1.6. Intentional Vulnerabilities</a></li>
 <li><a href="#_no_recourse_against_spam">1.7. No Recourse Against Spam</a></li>
 <li><a href="#_non_zero_transaction_fees">1.8. Non-zero Transaction Fees</a></li>
-<li><a href="#_double_spend_vulnerability">1.9. Double Spend Vulnerability</a></li>
-<li><a href="#_the_internet_of_things_does_not_exist">1.10. The Internet of Things Does Not Exist</a></li>
-<li><a href="#_premature_use_of_post_quantum_cryptography">1.11. Premature Use of Post-Quantum Cryptography</a></li>
-<li><a href="#_poor_wallet_security">1.12. Poor Wallet Security</a></li>
-<li><a href="#_unusable_network_and_wallet">1.13. Unusable Network and Wallet</a></li>
+<li><a href="#_the_internet_of_things_does_not_exist">1.9. The Internet of Things Does Not Exist</a></li>
+<li><a href="#_premature_use_of_post_quantum_cryptography">1.10. Premature Use of Post-Quantum Cryptography</a></li>
+<li><a href="#_poor_wallet_security">1.11. Poor Wallet Security</a></li>
+<li><a href="#_unusable_network_and_wallet">1.12. Unusable Network and Wallet</a></li>
 </ul>
 </li>
 </ul>
@@ -491,25 +490,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>IOTA is fully centralized. All IOTA transactions must be approved by a server run by The IOTA Foundation called "The Coordinator". <sup class="footnote" id="_footnote_iota-is-centralized">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>The Coordinator exists to prevent DoS attacks and double spends. The IOTA Foundation claims that at some point the coordinator can be phased out, but these claims are not credible due to the intractable nature of these issues. <sup class="footnote" id="_footnote_iota-doesnt-scale">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+<p>The Coordinator exists to prevent denial-of-service attacks and double spends. The IOTA Foundation claims that at some point the coordinator can be phased out, but these claims are not credible due to the intractable nature of these issues. <sup class="footnote" id="_footnote_iota-doesnt-scale">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>Since all transactions must be approved by a single server, run by a single entity, IOTA is not decentralized. Additionally, The Coordinator is a single point of failure, and has been shut down intentionally by The IOTA Foundation to halt activity on the network. <sup class="footnote" id="_footnote_iota-shutdown">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>The source code of The Coordinator has not been released, making it impossible to audit it for vulnerabilities, correctness, or fairness. <sup class="footnote" id="_footnote_coordinator-source">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_tip_selection_attack_vectors"><a class="anchor" href="#_tip_selection_attack_vectors"></a>1.2. Tip Selection Attack Vectors</h3>
 <div class="paragraph">
-<p>IOTA transactions are arranged in a directed acyclic graph, with each transaction referencing two previous transactions by hash. <sup class="footnote" id="_footnote_iota-whitepaper">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup></p>
+<p>IOTA transactions are arranged in a directed acyclic graph, with each transaction referencing two previous transactions by hash. <sup class="footnote" id="_footnote_iota-whitepaper">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>The choice of which transactions to reference is a matter of local policy, and thus nodes have enormous leeway in the shape of the graph that they construct, and which tips they select.</p>
 </div>
 <div class="paragraph">
-<p>If a selfish node wants their transaction to be accepted, they will select tips which they know that other nodes have already verified. This may lead to new transactions which are not known to many nodes to be confirmed slowly, or not at all.</p>
-</div>
-<div class="paragraph">
-<p>The functionality of the network depends on transactions getting confirmed in a timely fashion, even in the presence of malicious or selfish nodes. The IOTA developers claim that nodes will employ a tip-selection strategy which confirms new trasnactions quickly, however this has not been proven to be the case. <sup class="footnote" id="_footnote_iota-alarming">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup></p>
+<p>The functionality of the network depends on transactions getting confirmed in a timely fashion, even in the presence of malicious or selfish nodes. The IOTA developers claim that nodes will converge on a tip-selection strategy which confirms new transactions quickly, however this has not been proven to be the case. <sup class="footnote" id="_footnote_iota-alarming">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
@@ -527,16 +526,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_non_fungible_tokens"><a class="anchor" href="#_non_fungible_tokens"></a>1.4. Non-fungible Tokens</h3>
 <div class="paragraph">
-<p>IOTA transactions form a directed acyclic graph. However, a transaction&#8217;s position within that graph, and other factors, may make that transaction&#8217;s outputs more or less valuable than other transactions.</p>
+<p>A transaction&#8217;s position within the DAG, and other factors, may make that transaction&#8217;s outputs more or less valuable than other transactions.</p>
 </div>
 <div class="paragraph">
 <p>Because of this, nodes will likely have to enforce additional local policies on which transactions to accept, which negatively impacts the fungibility of IOTA transaction outputs.</p>
 </div>
 <div class="paragraph">
-<p>Outputs that have been included in a Coordinator milestone are more valuable than those that haven&#8217;t, since The Coordinator is the current the arbiter of truth in the IOTA system. Thus, if The Coordinator refuses to approve a transaction, its outputs are effectively worthless.</p>
+<p>Outputs that have been included in a Coordinator milestone are more valuable than those that haven&#8217;t, since The Coordinator is the current arbiter of truth in the IOTA system. Thus, if The Coordinator refuses to approve a transaction, its outputs are effectively worthless.</p>
 </div>
 <div class="paragraph">
-<p>Similarly, transaction outputs that appear in a snapshot <sup class="footnote" id="_footnote_iota-snapshot">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</sup> are more valuable than those that have. Additionally, whatever entities control what transactions are included in a snapshot have enormous power are an additional centralization factor. For an example, if transactions are deemed to be "spam" and are not included in an snapshot, their outputs will be worthless.</p>
+<p>Similarly, transaction outputs that appear in a snapshot <sup class="footnote" id="_footnote_iota-snapshot">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</sup> are more valuable than those that do not. Additionally, whatever entities control what transactions are included in a snapshot have enormous power are an additional centralization factor. For an example, if transactions are deemed to be "spam" and are not included in an snapshot, their outputs will be worthless.</p>
 </div>
 <div class="paragraph">
 <p>If IOTA adopts some kind of sharding mechanism, outputs will be more or less valuable on the basis of whether or not they are known to a particular shard. Outputs may have value within a shard, but be worthless outside of that shard.</p>
@@ -545,25 +544,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_broken_custom_hash_function"><a class="anchor" href="#_broken_custom_hash_function"></a>1.5. Broken Custom Hash Function</h3>
 <div class="paragraph">
-<p>IOTA used a custom hash function called Curl, which was later found to be insecure. <sup class="footnote" id="_footnote_curl-vulnerability-report">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</sup> <sup class="footnote" id="_footnote_breaking-curl">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</sup></p>
+<p>IOTA used a custom hash function called Curl, which was later found to be insecure. <sup class="footnote" id="_footnote_curl-vulnerability-report">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</sup> <sup class="footnote" id="_footnote_breaking-curl">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>Although this vulnerability was patched, the choice to use a custom hash function was an extremely bad one, and reflects poorly on the judgment of the IOTA developers.</p>
+<p>Although this vulnerability was patched, the choice to use a custom hash function was grossly incompetent, and reflecting extremely poorly on the judgment of the IOTA developers.</p>
 </div>
 <div class="paragraph">
 <p>Creating a cryptographically secure hash function is extremely difficult and furthermore unnecessary, as good hash functions are freely available. That Curl was eventually found to be vulnerable was an entirely predictable and avoidable outcome.</p>
 </div>
 <div class="paragraph">
-<p>The vulnerability in Curl required The IOTA Foundation to take custody of user funds, requiring users to to follow a byzantine reclamation process to get them back, with many users still unable to access their funds. <sup class="footnote" id="_footnote_reclaim-process">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</sup></p>
+<p>The vulnerability in Curl required The IOTA Foundation to take custody of user funds, requiring users to to follow a byzantine reclamation process to get them back, with many users still unable to access their funds. <sup class="footnote" id="_footnote_reclaim-process">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_intentional_vulnerabilities"><a class="anchor" href="#_intentional_vulnerabilities"></a>1.6. Intentional Vulnerabilities</h3>
 <div class="paragraph">
-<p>The IOTA developers have intentionally injected vulnerabilities into their open source code in an attempt to discourage copying. <sup class="footnote" id="_footnote_intentional-vulnerability">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</sup></p>
+<p>The IOTA developers have intentionally injected vulnerabilities into their open source code in an attempt to discourage copying. <sup class="footnote" id="_footnote_intentional-vulnerability">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>The code that they released was represented to be complete and free of known issues. The intentional inclusion of severe vulnerabilities in such code is plainly fraud. <sup class="footnote" id="_footnote_open-source-fraud">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</sup> <sup class="footnote" id="_footnote_iota-issues">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</sup></p>
+<p>The code that they released was represented to be complete and free of known issues. The intentional inclusion of severe vulnerabilities in such code is plainly fraud. <sup class="footnote" id="_footnote_open-source-fraud">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</sup> <sup class="footnote" id="_footnote_iota-issues">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
@@ -572,13 +571,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>No global transaction limit is enforced in IOTA, making it vulnerable to malicious participants generating a high enough volume of transactions to overwhelm the network. If the network becomes popular, nodes will likely be overwhelmed by non-malicious participents that simply generate a high volume of transactions. <sup class="footnoteref">[<a class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>IOTA is intended to be run on nodes with low power, compute, memory, disk, and network bandwidth, and such nodes will be easily overwhelmed by even a modest number of transactions. <sup class="footnote" id="_footnote_infinite-scalability">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</sup></p>
+<p>IOTA is intended to be run on nodes with low power, compute, memory, disk, and network bandwidth, and such nodes will be easily overwhelmed by even a modest number of transactions. <sup class="footnote" id="_footnote_infinite-scalability">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_non_zero_transaction_fees"><a class="anchor" href="#_non_zero_transaction_fees"></a>1.8. Non-zero Transaction Fees</h3>
 <div class="paragraph">
-<p>IOTA transactions do not pay an explicit fee. <sup class="footnoteref">[<a class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup> However, this does not mean that IOTA transactions are free.</p>
+<p>IOTA transactions do not pay an explicit fee. <sup class="footnoteref">[<a class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup> However, this does not mean that IOTA transactions are free.</p>
 </div>
 <div class="paragraph">
 <p>IOTA nodes must dedicate significant power, compute resources, and die space to perform the proof-of-work needed to generate transactions and process incoming transactions.</p>
@@ -587,43 +586,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Also, since the incentive for a transaction to be confirmed is unclear, a node may be required to pay a permanode, a node in another shard, or a central issuer of snapshots to confirm a transaction.</p>
 </div>
 <div class="paragraph">
-<p>Thus, even if a node pays no explicit fee for its transactions, it may pay significant implicit fees, and thus the claim that IOTA transactions are free of fees is only superficial true, and false in every sense that matters. <sup class="footnote" id="_footnote_iota-response">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</sup></p>
+<p>Thus, even if a node pays no explicit fee for its transactions, it may pay significant implicit fees, and thus the claim that IOTA transactions are free of fees is only superficial true, and false in every sense that matters. <sup class="footnote" id="_footnote_iota-response">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_double_spend_vulnerability"><a class="anchor" href="#_double_spend_vulnerability"></a>1.9. Double Spend Vulnerability</h3>
-<div class="paragraph">
-<p>Since there is no global view of the ledger, double spends are possible by constructing transactions that spend the same output to different nodes.</p>
-</div>
-<div class="paragraph">
-<p>Additionally, since IOTA is planned to be deployed over mesh networks without universal connectivity, nodes will likely have different views of the transaction graph, making double spend attacks difficult to detect.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_the_internet_of_things_does_not_exist"><a class="anchor" href="#_the_internet_of_things_does_not_exist"></a>1.10. The Internet of Things Does Not Exist</h3>
+<h3 id="_the_internet_of_things_does_not_exist"><a class="anchor" href="#_the_internet_of_things_does_not_exist"></a>1.9. The Internet of Things Does Not Exist</h3>
 <div class="paragraph">
 <p>IOTA is built for a global network of embedded devices communicating over mesh networks. This network does not currently exist and does not seem likely to exist. Currently manufactured IoT devices connect through the internet, and no compelling reason to believe that this may change exists.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_premature_use_of_post_quantum_cryptography"><a class="anchor" href="#_premature_use_of_post_quantum_cryptography"></a>1.11. Premature Use of Post-Quantum Cryptography</h3>
+<h3 id="_premature_use_of_post_quantum_cryptography"><a class="anchor" href="#_premature_use_of_post_quantum_cryptography"></a>1.10. Premature Use of Post-Quantum Cryptography</h3>
 <div class="paragraph">
-<p>IOTA uses cryptography that cannot be broken by quantum computers. <sup class="footnoteref">[<a class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup> The use of such cryptography, specifically Winternitz signatures, leaves IOTA users vulnerable to loss of funds if they ever reuse an address. This attack that has already been seen in practice, with one user reportedly losing $30,000 USD worth of IOTA. <sup class="footnote" id="_footnote_iota-stolen">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</sup></p>
+<p>IOTA uses cryptography that cannot be broken by quantum computers. <sup class="footnoteref">[<a class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup> The use of such cryptography, specifically Winternitz signatures, leaves IOTA users vulnerable to loss of funds if they ever reuse an address. This attack that has already been seen in practice, with one user reportedly losing $30,000 USD worth of IOTA. <sup class="footnote" id="_footnote_iota-stolen">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>As quantum computers large enough to threaten existing cryptosystems do not exist and may not exist for many decades, this use of post quantum cryptography comes with no tangible benefit.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_poor_wallet_security"><a class="anchor" href="#_poor_wallet_security"></a>1.12. Poor Wallet Security</h3>
+<h3 id="_poor_wallet_security"><a class="anchor" href="#_poor_wallet_security"></a>1.11. Poor Wallet Security</h3>
 <div class="paragraph">
-<p>The IOTA wallet requires users to manually enter an 81 character seed, instead of securely generating one. This led users to use malicious online seed generators, leading to the theft of almost $4 million of user funds. <sup class="footnote" id="_footnote_seed-generators">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</sup></p>
+<p>The IOTA wallet requires users to manually enter an 81 character seed, instead of securely generating one. This led users to use malicious online seed generators, leading to the theft of almost $4 million of user funds. <sup class="footnote" id="_footnote_seed-generators">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_unusable_network_and_wallet"><a class="anchor" href="#_unusable_network_and_wallet"></a>1.13. Unusable Network and Wallet</h3>
+<h3 id="_unusable_network_and_wallet"><a class="anchor" href="#_unusable_network_and_wallet"></a>1.12. Unusable Network and Wallet</h3>
 <div class="paragraph">
-<p>Users have reported numerous issues with the IOTA network and wallet software. These include unusable software, a slow and unusable network, loss of funds, and an inability to move funds. <sup class="footnote" id="_footnote_a-tangled-mess">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</sup> <sup class="footnote" id="_footnote_iota-cannot-be-used-for-iot">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup> <sup class="footnote" id="_footnote_iota-disappointment">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</sup> <sup class="footnote" id="_footnote_iota-wallet-is-terrible">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</sup> <sup class="footnote" id="_footnote_iota-scam">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</sup> <sup class="footnote" id="_footnote_light-wallet-unusable">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup> <sup class="footnote" id="_footnote_money-trapped">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup> <sup class="footnote" id="_footnote_network-dead">[<a id="_footnoteref_24" class="footnote" href="#_footnote_24" title="View footnote.">24</a>]</sup> <sup class="footnote" id="_footnote_network-unusable">[<a id="_footnoteref_25" class="footnote" href="#_footnote_25" title="View footnote.">25</a>]</sup></p>
+<p>Users have reported numerous issues with the IOTA network and wallet software. These include unusable software, a slow and unusable network, loss of funds, and an inability to move funds. <sup class="footnote" id="_footnote_a-tangled-mess">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</sup> <sup class="footnote" id="_footnote_iota-cannot-be-used-for-iot">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</sup> <sup class="footnote" id="_footnote_iota-disappointment">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</sup> <sup class="footnote" id="_footnote_iota-wallet-is-terrible">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</sup> <sup class="footnote" id="_footnote_iota-scam">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</sup> <sup class="footnote" id="_footnote_light-wallet-unusable">[<a id="_footnoteref_23" class="footnote" href="#_footnote_23" title="View footnote.">23</a>]</sup> <sup class="footnote" id="_footnote_money-trapped">[<a id="_footnoteref_24" class="footnote" href="#_footnote_24" title="View footnote.">24</a>]</sup> <sup class="footnote" id="_footnote_network-dead">[<a id="_footnoteref_25" class="footnote" href="#_footnote_25" title="View footnote.">25</a>]</sup> <sup class="footnote" id="_footnote_network-unusable">[<a id="_footnoteref_26" class="footnote" href="#_footnote_26" title="View footnote.">26</a>]</sup></p>
 </div>
 </div>
 </div>
@@ -641,70 +631,73 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <a href="#_footnoteref_3">3</a>. <a href="https://blog.iota.org/gui-v2-5-2-latest-release-with-iota-reclaim-tool-32d364d6241a">GUI v2.5.2: Latest Release with IOTA Reclaim Tool</a>, <a href="https://twitter.com/DomSchiener">Dominik Schiener</a>
 </div>
 <div class="footnote" id="_footnote_4">
-<a href="#_footnoteref_4">4</a>. <a href="https://iota.org/IOTA_Whitepaper.pdf">IOTA Whitepaper</a>, <a href="https://blog.iota.org/@serguei.popov">Serguei Papov</a>
+<a href="#_footnoteref_4">4</a>. <a href="https://www.reddit.com/r/Iota/comments/6z04yn/why_is_the_coordinator_source_code_not_public/" class="bare">https://www.reddit.com/r/Iota/comments/6z04yn/why_is_the_coordinator_source_code_not_public/</a>,   Why is the coordinator source code not public?
 </div>
 <div class="footnote" id="_footnote_5">
-<a href="#_footnoteref_5">5</a>. <a href="https://medium.com/@weka/why-i-find-iota-deeply-alarming-934f1908194b">Why I find Iota deeply alarming</a>, <a href="https://www.linkedin.com/in/nicksdjohnson/">Nick Johnson</a>
+<a href="#_footnoteref_5">5</a>. <a href="https://iota.org/IOTA_Whitepaper.pdf">IOTA Whitepaper</a>, <a href="https://blog.iota.org/@serguei.popov">Serguei Papov</a>
 </div>
 <div class="footnote" id="_footnote_6">
-<a href="#_footnoteref_6">6</a>. <a href="https://medium.com/@ralf/prepare-for-the-january-28-2018-iota-snapshot-10f565b371ab">Prepare for the January 28, 2018 IOTA Snapshot (updated)</a>, <a href="https://twitter.com/ralf">Ralf Rottmann</a>
+<a href="#_footnoteref_6">6</a>. <a href="https://medium.com/@weka/why-i-find-iota-deeply-alarming-934f1908194b">Why I find Iota deeply alarming</a>, <a href="https://www.linkedin.com/in/nicksdjohnson/">Nick Johnson</a>
 </div>
 <div class="footnote" id="_footnote_7">
-<a href="#_footnoteref_7">7</a>. <a href="https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md">IOTA Vulnerability Report: Cryptanalysis of the Curl Hash Function Enabling Practical Signature Forgery Attacks on the IOTA Cryptocurrency</a>, <a href="https://www.linkedin.com/in/ethan-heilman-39896934/">Ethan Heilman</a>, <a href="http://nehanarula.org/">Neha Narula</a>, <a href="https://twitter.com/tdryja">Thaddeus Dryja</a>, and <a href="https://madars.org/">Madars Virza</a>
+<a href="#_footnoteref_7">7</a>. <a href="https://medium.com/@ralf/prepare-for-the-january-28-2018-iota-snapshot-10f565b371ab">Prepare for the January 28, 2018 IOTA Snapshot (updated)</a>, <a href="https://twitter.com/ralf">Ralf Rottmann</a>
 </div>
 <div class="footnote" id="_footnote_8">
-<a href="#_footnoteref_8">8</a>. <a href="https://www.youtube.com/watch?v=7a96MHqND0g">Breaking IOTA&#8217;s Curl Hash Function</a>, <a href="http://cs-people.bu.edu/heilman/">Ethan Heilman</a>
+<a href="#_footnoteref_8">8</a>. <a href="https://github.com/mit-dci/tangled-curl/blob/master/vuln-iota.md">IOTA Vulnerability Report: Cryptanalysis of the Curl Hash Function Enabling Practical Signature Forgery Attacks on the IOTA Cryptocurrency</a>, <a href="https://www.linkedin.com/in/ethan-heilman-39896934/">Ethan Heilman</a>, <a href="http://nehanarula.org/">Neha Narula</a>, <a href="https://twitter.com/tdryja">Thaddeus Dryja</a>, and <a href="https://madars.org/">Madars Virza</a>
 </div>
 <div class="footnote" id="_footnote_9">
-<a href="#_footnoteref_9">9</a>. <a href="https://blog.iota.org/gui-wallet-phase-two-of-the-reclaim-process-f5913109cf46">GUI Wallet: Phase Two of the Reclaim process</a>, <a href="https://twitter.com/DomSchiener">Dominik Schiener</a>
+<a href="#_footnoteref_9">9</a>. <a href="https://www.youtube.com/watch?v=7a96MHqND0g">Breaking IOTA&#8217;s Curl Hash Function</a>, <a href="http://cs-people.bu.edu/heilman/">Ethan Heilman</a>
 </div>
 <div class="footnote" id="_footnote_10">
-<a href="#_footnoteref_10">10</a>. <a href="https://gist.github.com/Come-from-Beyond/a84ab8615aac13a4543c786f9e35b84a">CFB&#8217;s letters to Neha Narula&#8217;s team during their analysis of Curl-P hash function</a>, <a href="https://twitter.com/c___f___b">Sergey Ivancheglo</a>
+<a href="#_footnoteref_10">10</a>. <a href="https://blog.iota.org/gui-wallet-phase-two-of-the-reclaim-process-f5913109cf46">GUI Wallet: Phase Two of the Reclaim process</a>, <a href="https://twitter.com/DomSchiener">Dominik Schiener</a>
 </div>
 <div class="footnote" id="_footnote_11">
-<a href="#_footnoteref_11">11</a>. <a href="https://twitter.com/peterktodd/status/907837055715172352">Tweet</a>, <a href="https://petertodd.org/">Peter Todd</a>
+<a href="#_footnoteref_11">11</a>. <a href="https://gist.github.com/Come-from-Beyond/a84ab8615aac13a4543c786f9e35b84a">CFB&#8217;s letters to Neha Narula&#8217;s team during their analysis of Curl-P hash function</a>, <a href="https://twitter.com/c___f___b">Sergey Ivancheglo</a>
 </div>
 <div class="footnote" id="_footnote_12">
-<a href="#_footnoteref_12">12</a>. <a href="https://www.reddit.com/r/CryptoCurrency/comments/72l7kp/why_i_find_iota_deeply_alarming_eth_core_dev/">Issue with IOTA, Reddit Comment</a>, <a href="https://twitter.com/VitalikButerin">Vitalik Buterin</a>
+<a href="#_footnoteref_12">12</a>. <a href="https://twitter.com/peterktodd/status/907837055715172352">Tweet</a>, <a href="https://petertodd.org/">Peter Todd</a>
 </div>
 <div class="footnote" id="_footnote_13">
-<a href="#_footnoteref_13">13</a>. <a href="https://twitter.com/nicksdjohnson/status/964036549162790912">Tweet</a>, <a href="https://www.linkedin.com/in/nicksdjohnson/">Nick Johnson</a>
+<a href="#_footnoteref_13">13</a>. <a href="https://www.reddit.com/r/CryptoCurrency/comments/72l7kp/why_i_find_iota_deeply_alarming_eth_core_dev/">Issue with IOTA, Reddit Comment</a>, <a href="https://twitter.com/VitalikButerin">Vitalik Buterin</a>
 </div>
 <div class="footnote" id="_footnote_14">
-<a href="#_footnoteref_14">14</a>. <a href="https://www.media.mit.edu/posts/iota-response/">Our response to "A Cryptocurrency Without a Blockchain Has Been Built to Outperform Bitcoin"</a>, <a href="https://joi.ito.com/">Joi Ito</a>
+<a href="#_footnoteref_14">14</a>. <a href="https://twitter.com/nicksdjohnson/status/964036549162790912">Tweet</a>, <a href="https://www.linkedin.com/in/nicksdjohnson/">Nick Johnson</a>
 </div>
 <div class="footnote" id="_footnote_15">
-<a href="#_footnoteref_15">15</a>. <a href="https://www.reddit.com/r/CryptoCurrency/comments/7gwl38/hello_guys_i_have_lost_30k_in_iota_and_i_would/">User reports $30,000 worth of IOTA stolen due weakness of IOTA&#8217;s post-quantum signature scheme to address reuse</a>
+<a href="#_footnoteref_15">15</a>. <a href="https://www.media.mit.edu/posts/iota-response/">Our response to "A Cryptocurrency Without a Blockchain Has Been Built to Outperform Bitcoin"</a>, <a href="https://joi.ito.com/">Joi Ito</a>
 </div>
 <div class="footnote" id="_footnote_16">
-<a href="#_footnoteref_16">16</a>. <a href="https://twitter.com/nic__carter/status/954950774534090752">Tweet</a>, <a href="https://cryptofundamental.com/@nic__carter">Nic Carter</a>
+<a href="#_footnoteref_16">16</a>. <a href="https://www.reddit.com/r/CryptoCurrency/comments/7gwl38/hello_guys_i_have_lost_30k_in_iota_and_i_would/">User reports $30,000 worth of IOTA stolen due weakness of IOTA&#8217;s post-quantum signature scheme to address reuse</a>
 </div>
 <div class="footnote" id="_footnote_17">
-<a href="#_footnoteref_17">17</a>. <a href="http://codesuppository.blogspot.com/2017/12/iota-tangled-mess.html?m=1">IOTA: A Tangled Mess</a>, <a href="https://github.com/jratcliff63367">John Ratcliff</a>
+<a href="#_footnoteref_17">17</a>. <a href="https://twitter.com/nic__carter/status/954950774534090752">Tweet</a>, <a href="https://cryptofundamental.com/@nic__carter">Nic Carter</a>
 </div>
 <div class="footnote" id="_footnote_18">
-<a href="#_footnoteref_18">18</a>. <a href="https://shitcoin.com/iota-cannot-be-used-for-iot-loss-of-funds-may-occur-e45b1ed9dd6b">IOTA: Cannot be used for IoT. Loss of funds may occur</a>, <a href="https://twitter.com/abrkn">Andreas Brekken</a>
+<a href="#_footnoteref_18">18</a>. <a href="http://codesuppository.blogspot.com/2017/12/iota-tangled-mess.html?m=1">IOTA: A Tangled Mess</a>, <a href="https://github.com/jratcliff63367">John Ratcliff</a>
 </div>
 <div class="footnote" id="_footnote_19">
-<a href="#_footnoteref_19">19</a>. <a href="https://github.com/iotaledger/wallet/issues/734">My IOTA disappointment and a warning to others</a>, <a href="https://github.com/UnitTwopointZero">UnitTwopointZero</a>
+<a href="#_footnoteref_19">19</a>. <a href="https://shitcoin.com/iota-cannot-be-used-for-iot-loss-of-funds-may-occur-e45b1ed9dd6b">IOTA: Cannot be used for IoT. Loss of funds may occur</a>, <a href="https://twitter.com/abrkn">Andreas Brekken</a>
 </div>
 <div class="footnote" id="_footnote_20">
-<a href="#_footnoteref_20">20</a>. <a href="https://www.reddit.com/r/Iota/comments/6y19n2/iota_wallet_is_terribleunusable/">IOTA Wallet is terrible/unusable</a>, <a href="https://www.reddit.com/user/winghaven">winghaven</a>
+<a href="#_footnoteref_20">20</a>. <a href="https://github.com/iotaledger/wallet/issues/734">My IOTA disappointment and a warning to others</a>, <a href="https://github.com/UnitTwopointZero">UnitTwopointZero</a>
 </div>
 <div class="footnote" id="_footnote_21">
-<a href="#_footnoteref_21">21</a>. <a href="https://medium.com/supercryptocurrency/iota-cryptocurrency-is-a-scam-heres-10-reasons-why-ca111de0f19a">IOTA cryptocurrency is a scam, here’s 10 good reasons why</a>, <a href="https://medium.com/@AndroidAdvance">Android Advance</a>
+<a href="#_footnoteref_21">21</a>. <a href="https://www.reddit.com/r/Iota/comments/6y19n2/iota_wallet_is_terribleunusable/">IOTA Wallet is terrible/unusable</a>, <a href="https://www.reddit.com/user/winghaven">winghaven</a>
 </div>
 <div class="footnote" id="_footnote_22">
-<a href="#_footnoteref_22">22</a>. <a href="https://forum.iota.org/t/light-wallet-2-3-1-unusable-invalid-transaction-hash-after-every-transfer-attempt/2689">Light Wallet 2.3.1 unusable</a>, <a href="https://forum.iota.org/u/portman/">Fabrizio Ranieri</a>
+<a href="#_footnoteref_22">22</a>. <a href="https://medium.com/supercryptocurrency/iota-cryptocurrency-is-a-scam-heres-10-reasons-why-ca111de0f19a">IOTA cryptocurrency is a scam, here’s 10 good reasons why</a>, <a href="https://medium.com/@AndroidAdvance">Android Advance</a>
 </div>
 <div class="footnote" id="_footnote_23">
-<a href="#_footnoteref_23">23</a>. <a href="https://www.cryptocompare.com/coins/iot/post/p_554737">Iota light wallet is completely unusable</a>, <a href="https://www.cryptocompare.com/profile/mindblown/">mindblown</a>
+<a href="#_footnoteref_23">23</a>. <a href="https://forum.iota.org/t/light-wallet-2-3-1-unusable-invalid-transaction-hash-after-every-transfer-attempt/2689">Light Wallet 2.3.1 unusable</a>, <a href="https://forum.iota.org/u/portman/">Fabrizio Ranieri</a>
 </div>
 <div class="footnote" id="_footnote_24">
-<a href="#_footnoteref_24">24</a>. <a href="https://twitter.com/jratcliff/status/939578638432985088">Tweet</a>, <a href="https://github.com/jratcliff63367">John Ratcliff</a>
+<a href="#_footnoteref_24">24</a>. <a href="https://www.cryptocompare.com/coins/iot/post/p_554737">Iota light wallet is completely unusable</a>, <a href="https://www.cryptocompare.com/profile/mindblown/">mindblown</a>
 </div>
 <div class="footnote" id="_footnote_25">
-<a href="#_footnoteref_25">25</a>. <a href="https://twitter.com/maxekaplan/status/939916284967444480">Tweet</a>, <a href="https://twitter.com/maxekaplan">Max Kaplan</a>
+<a href="#_footnoteref_25">25</a>. <a href="https://twitter.com/jratcliff/status/939578638432985088">Tweet</a>, <a href="https://github.com/jratcliff63367">John Ratcliff</a>
+</div>
+<div class="footnote" id="_footnote_26">
+<a href="#_footnoteref_26">26</a>. <a href="https://twitter.com/maxekaplan/status/939916284967444480">Tweet</a>, <a href="https://twitter.com/maxekaplan">Max Kaplan</a>
 </div>
 </div>
 </body>
