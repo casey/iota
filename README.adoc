@@ -28,7 +28,7 @@ IOTA is fully centralized. All IOTA transactions must be approved by a server ru
   https://medium.com/@ercwl/iota-is-centralized-6289246e7b4d[IOTA is centralized], https://twitter.com/ercwl[Eric Wall]
 ]
 
-The Coordinator exists to prevent DoS attacks and double spends. The IOTA Foundation claims that at some point the coordinator can be phased out, but these claims are not credible due to the intractable nature of these issues. footnoteref:[iota-doesnt-scale,
+The Coordinator exists to prevent denial-of-service attacks and double spends. The IOTA Foundation claims that at some point the coordinator can be phased out, but these claims are not credible due to the intractable nature of these issues. footnoteref:[iota-doesnt-scale,
   https://medium.com/@kaykurokawa/iota-doesnt-scale-fff54f56e975[IOTA Doesn't Scale], https://twitter.com/kaykurokawa[Kay Kurokawa]
 ]
 
@@ -44,8 +44,6 @@ IOTA transactions are arranged in a directed acyclic graph, with each transactio
 ]
 
 The choice of which transactions to reference is a matter of local policy, and thus nodes have enormous leeway in the shape of the graph that they construct, and which tips they select.
-
-If a selfish node wants their transaction to be accepted, they will select tips which they know that other nodes have already verified. This may lead to new transactions which are not known to many nodes to be confirmed slowly, or not at all.
 
 The functionality of the network depends on transactions getting confirmed in a timely fashion, even in the presence of malicious or selfish nodes. The IOTA developers claim that nodes will employ a tip-selection strategy which confirms new transactions quickly, however this has not been proven to be the case. footnoteref:[iota-alarming,
   https://medium.com/@weka/why-i-find-iota-deeply-alarming-934f1908194b[Why I find Iota deeply alarming], https://www.linkedin.com/in/nicksdjohnson/[Nick Johnson]
@@ -84,7 +82,7 @@ IOTA used a custom hash function called Curl, which was later found to be insecu
   https://www.youtube.com/watch?v=7a96MHqND0g[Breaking IOTA's Curl Hash Function], http://cs-people.bu.edu/heilman/[Ethan Heilman]
 ]
 
-Although this vulnerability was patched, the choice to use a custom hash function was a highly incompetent one, and reflects poorly on the judgment of the IOTA developers.
+Although this vulnerability was patched, the choice to use a custom hash function was grossly incompetent, and reflecting extremely poorly on the judgment of the IOTA developers.
 
 Creating a cryptographically secure hash function is extremely difficult and furthermore unnecessary, as good hash functions are freely available. That Curl was eventually found to be vulnerable was an entirely predictable and avoidable outcome.
 
