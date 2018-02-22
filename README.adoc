@@ -110,7 +110,7 @@ The code that they released was represented to be complete and free of known iss
 
 === No Recourse Against Spam
 
-No global transaction limit is enforced in IOTA, making it vulnerable to malicious participants generating a high enough volume of transactions to overwhelm the network. If the network becomes popular, nodes will likely be overwhelmed by non-malicious participents that simply generate a high volume of transactions. footnoteref:[iota-doesnt-scale]
+No global transaction limit is enforced in IOTA, making it vulnerable to malicious participants generating a high enough volume of transactions to overwhelm the network. If the network becomes popular, nodes will likely be overwhelmed by non-malicious participants that simply generate a high volume of transactions. footnoteref:[iota-doesnt-scale]
 
 IOTA is intended to be run on nodes with low power, compute, memory, disk, and network bandwidth, and such nodes will be easily overwhelmed by even a modest number of transactions. footnoteref:[infinite-scalability,
   https://twitter.com/nicksdjohnson/status/964036549162790912[Tweet], https://www.linkedin.com/in/nicksdjohnson/[Nick Johnson]
