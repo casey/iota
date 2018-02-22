@@ -84,7 +84,7 @@ IOTA used a custom hash function called Curl, which was later found to be insecu
   https://www.youtube.com/watch?v=7a96MHqND0g[Breaking IOTA's Curl Hash Function], http://cs-people.bu.edu/heilman/[Ethan Heilman]
 ]
 
-Although this vulnerability was patched, the choice to use a custom hash function was an extremely bad one, and reflects poorly on the judgment of the IOTA developers.
+Although this vulnerability was patched, the choice to use a custom hash function was a highly incompetent one, and reflects poorly on the judgment of the IOTA developers.
 
 Creating a cryptographically secure hash function is extremely difficult and furthermore unnecessary, as good hash functions are freely available. That Curl was eventually found to be vulnerable was an entirely predictable and avoidable outcome.
 
