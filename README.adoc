@@ -10,6 +10,8 @@ Casey Rodarmor <casey@rodarmor.com>
 [discrete]
 == Introduction
 
+IOTA is a cryptocurrency targeting the internet of things. It purports to be scalable, decentralized, and feeless. Unfortunately it is none of those things.
+
 In this article I attempt to summarize the numerous technical, social, and ethical problems surrounding the IOTA project, The IOTA Foundation, and the IOTA developers.
 
 If you have suggestions for improvement or additional references, please open a pull-request or issue https://github.com/casey/iota[here].
@@ -153,7 +155,7 @@ The IOTA wallet requires users to manually enter an 81 character seed, instead o
 === Unusable Network and Wallet
 
 Users have reported numerous issues with the IOTA network and wallet software. These include unusable software, a slow and unusable network, loss of funds, and an inability to move funds. footnoteref:[a-tangled-mess,
-  http://codesuppository.blogspot.com/2017/12/iota-tangled-mess.html?m=1[IOTA: A Tangled Mess], https://github.com/jratcliff63367[John Ratcliff] 
+  http://codesuppository.blogspot.com/2017/12/iota-tangled-mess.html?m=1[IOTA: A Tangled Mess], https://github.com/jratcliff63367[John Ratcliff]
 ] footnoteref:[iota-cannot-be-used-for-iot,
   https://shitcoin.com/iota-cannot-be-used-for-iot-loss-of-funds-may-occur-e45b1ed9dd6b[IOTA: Cannot be used for IoT. Loss of funds may occur], https://twitter.com/abrkn[Andreas Brekken]
 ] footnoteref:[iota-disappointment,
