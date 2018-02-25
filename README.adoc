@@ -127,7 +127,7 @@ IOTA nodes must dedicate significant power, compute resources, and die space to 
 
 Also, since the incentive for a transaction to be confirmed is unclear, a node may be required to pay a permanode, a node in another shard, or a central issuer of snapshots to confirm a transaction.
 
-Thus, even if a node pays no explicit fee for its transactions, it may pay significant implicit fees, and thus the claim that IOTA transactions are free of fees is only superficial true, and false in every sense that matters. footnoteref:[iota-response,
+Thus, even if a node pays no explicit fee for its transactions, it may pay significant implicit fees, and thus the claim that IOTA transactions are free of fees is only superficially true, and false in every sense that matters. footnoteref:[iota-response,
   https://www.media.mit.edu/posts/iota-response/[Our response to "A Cryptocurrency Without a Blockchain Has Been Built to Outperform Bitcoin"], https://joi.ito.com/[Joi Ito]
 ]
 
@@ -139,11 +139,11 @@ IOTA is built for a global network of embedded devices communicating over mesh n
 
 === Premature Use of Post-Quantum Cryptography
 
-IOTA uses cryptography that cannot be broken by quantum computers. footnoteref:[iota-whitepaper] The use of such cryptography, specifically Winternitz signatures, leaves IOTA users vulnerable to loss of funds if they ever reuse an address. This attack that has already been seen in practice, with one user reportedly losing $30,000 USD worth of IOTA. footnoteref:[iota-stolen,
+IOTA uses cryptography that cannot be broken by quantum computers. footnoteref:[iota-whitepaper] The use of such cryptography, specifically Winternitz signatures, leaves IOTA users vulnerable to loss of funds if they ever reuse an address. This attack has already been seen in practice, with one user reportedly losing $30,000 USD worth of IOTA. footnoteref:[iota-stolen,
   https://www.reddit.com/r/CryptoCurrency/comments/7gwl38/hello_guys_i_have_lost_30k_in_iota_and_i_would/[User reports $30,000 worth of IOTA stolen due weakness of IOTA's post-quantum signature scheme to address reuse]
 ]
 
-As quantum computers large enough to threaten existing cryptosystems do not exist and may not exist for many decades, this use of post quantum cryptography comes with no tangible benefit.
+As quantum computers large enough to threaten existing cryptosystems do not exist and may not exist for many decades, this use of post-quantum cryptography comes with no tangible benefit.
 
 
 === Poor Wallet Security
